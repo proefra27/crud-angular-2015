@@ -3,6 +3,7 @@ import { ActivatedRoute, RouterLink } from "@angular/router";
 import { Entrenador } from '../../../models/entrenador';
 import { FormsModule } from '@angular/forms';
 import { EntrenadorService } from '../../../services/entrenador.service';
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'app-actualizar-entrenador',
@@ -19,7 +20,7 @@ export class ActualizarEntrenadorComponent {
     experiencia:0
   }
 
-  constructor(private servicioEntrenador:EntrenadorService, private rutaActiva:ActivatedRoute){
+  constructor(private servicioEntrenador:EntrenadorService, private rutaActiva:ActivatedRoute, private authService:AuthService){
 
   }
 
@@ -31,6 +32,19 @@ export class ActualizarEntrenadorComponent {
       },
       error:(error)=>{
         alert('Ocurrio un error')
+      }
+    })
+  }
+
+  actualizar(){
+    alert(this.authService.getToken());
+    this.servicioEntrenador.updateEntrenador(this.entrenador.id,this.entrenador).subscribe({
+      next:(data)=>{
+        alert("Entrenador actualizado");
+        //Navegar al listado de entrenadores
+      },
+      error:(error)=>{
+        alert('Ocurrio un error al actualizar al entrenador');
       }
     })
   }

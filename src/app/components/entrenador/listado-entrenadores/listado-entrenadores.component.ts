@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { Entrenador } from '../../../models/entrenador';
 import { EntrenadorService } from '../../../services/entrenador.service';
-import { RouterLink } from "@angular/router";
+import { Router, RouterLink } from "@angular/router";
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'app-listado-entrenadores',
@@ -15,7 +16,10 @@ export class ListadoEntrenadoresComponent {
   datosCargados:boolean=false;
   //En el contructor inyectamos todo lo que se requiera
 
-  constructor(private servicioEntrenador:EntrenadorService){
+  constructor(
+    private servicioEntrenador:EntrenadorService,
+    private authService:AuthService,
+    private rutas:Router){
 
   }
 
@@ -33,6 +37,11 @@ export class ListadoEntrenadoresComponent {
         alert("Error interno de servidor: "+error);
       }
     })
+  }
+
+  logout(){
+    this.authService.logout();
+    this.rutas.navigate(['/login']);
   }
 
 }

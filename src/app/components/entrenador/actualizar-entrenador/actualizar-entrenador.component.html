@@ -14,7 +14,7 @@
       <label for="experiencia" class="form-label">Experiencia</label>
       <input type="number" class="form-control" [(ngModel)]="entrenador.experiencia" id="experiencia" name="experiencia">
     </div>
-    <button type="button" class="btn btn-primary">Actualizar</button>&nbsp;
+    <button type="button" class="btn btn-primary" (click)="actualizar()">Actualizar</button>&nbsp;
     <button type="button" class="btn btn-secondary" routerLink="/entrenadores">Cancelar</button>
   </form>
 </div>

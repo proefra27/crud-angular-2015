@@ -5,14 +5,15 @@ import { EliminarEntrenadorComponent } from './components/entrenador/eliminar-en
 import { AgregarEntrenadorComponent } from './components/entrenador/agregar-entrenador/agregar-entrenador.component';
 import { RegistroComponent } from './components/auth/registro/registro.component';
 import { LoginComponent } from './components/auth/login/login.component';
+import { miguardGuard } from './guards/miguard.guard';
 
 //Proteger con guards
 //Agregar el token en las solicitudes: PUT, POST, DELETE - Requiere Token
 export const routes: Routes = [
-  {path:'entrenadores', component:ListadoEntrenadoresComponent},
-  {path:'entrenadores/editar/:id',component:ActualizarEntrenadorComponent},
-  {path:'entrenadores/eliminar/:id',component:EliminarEntrenadorComponent},
-  {path:'entrenadores/agregar',component:AgregarEntrenadorComponent},
+  {path:'entrenadores', component:ListadoEntrenadoresComponent,canActivate:[miguardGuard]},
+  {path:'entrenadores/editar/:id',component:ActualizarEntrenadorComponent,canActivate:[miguardGuard]},
+  {path:'entrenadores/eliminar/:id',component:EliminarEntrenadorComponent,canActivate:[miguardGuard]},
+  {path:'entrenadores/agregar',component:AgregarEntrenadorComponent,canActivate:[miguardGuard]},
 
   {path:'login',component:LoginComponent},
   {path:'registro',component:RegistroComponent}
